@@ -1,7 +1,10 @@
 # views.py
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
+from django.contrib import messages
 from .models import Contact
+from django.views.decorators.csrf import csrf_exempt
 from .forms import ContactForm
 
 def contact_form(request):
@@ -9,15 +12,25 @@ def contact_form(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('contact_list')
+            messages.success(request, 'Form submitted successfully!')
+            return redirect('contact_form')
     else:
         form = ContactForm()
     return render(request, 'sound/contact_form.html', {'form': form})
 
 def contact_list(request):
     contacts = Contact.objects.all()
-    paginator = Paginator(contacts, 5)  # Show 10 contacts per page
+    paginator = Paginator(contacts, 5)  
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'sound/contact_list.html', {'page_obj': page_obj})
+
+@csrf_exempt
+def update_status(request, contact_id):
+    if request.method == 'POST':
+        contact = get_object_or_404(Contact, pk=contact_id)
+        contact.status = 'Sent'
+        contact.save()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'fail'}, status=400)

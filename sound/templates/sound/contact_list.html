@@ -25,13 +25,31 @@
             color: blue;
             cursor: pointer;
         }
+        .btn-pending {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: black;
+        }
+        .btn-pending:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        .btn-sent {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-sent:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
     </style>
 </head>
 <body>
     <div class="container my-4">
         <div class="card">
-            <div class="card-header">
-                <h2 class="mb-0 text-center">Contact List</h2>
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0 text-center">List of Detail</h2>
             </div>
             <div class="card-body">
                 <table class="table table-striped">
@@ -42,7 +60,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">Phone Number</th>
                             <th scope="col">Content</th>
-                            <th scope="col">Sent</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,15 +74,36 @@
                                 <div class="content-short truncate">
                                     {{ contact.content|truncatewords:20 }}
                                 </div>
-                                <div class="content-full d-none">
-                                    {{ contact.content }}
-                                </div>
-                                <span class="read-more">Read More</span>
+                                <div class="content-full d-none">{{ contact.content }}</div>
+                                <button type="button" class="btn btn-link read-more" data-toggle="modal" data-target="#contentModal{{ contact.id }}">Read More</button>
                             </td>
-                            <td><button type="button" class="btn btn-success">Sent</button></td>
+                            <td>
+                                {% if contact.status == 'Pending' %}
+                                    <button type="button" class="btn btn-pending" data-contact-id="{{ contact.id }}" onclick="markAsSent(this)">Pending</button>
+                                {% else %}
+                                    <button type="button" class="btn btn-sent" data-contact-id="{{ contact.id }}" disabled>Sent</button>
+                                {% endif %}
+                            </td>
                         </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="contentModal{{ contact.id }}" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel{{ contact.id }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="contentModalLabel{{ contact.id }}">Full Content</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p id="modalContent{{ contact.id }}">{{ contact.content }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {% endfor %}
                     </tbody>
+                    
                 </table>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
@@ -106,20 +145,45 @@
         $(document).ready(function() {
             $('.read-more').on('click', function() {
                 var $this = $(this);
-                var $contentShort = $this.siblings('.content-short');
-                var $contentFull = $this.siblings('.content-full');
+                var content = $this.siblings('.content-full').text();
                 
-                if ($contentFull.hasClass('d-none')) {
-                    $contentShort.addClass('d-none');
-                    $contentFull.removeClass('d-none');
-                    $this.text('Read Less');
-                } else {
-                    $contentFull.addClass('d-none');
-                    $contentShort.removeClass('d-none');
-                    $this.text('Read More');
-                }
+                // Set the content in the modal
+                $('#modalContent').text(content);
+                
+                // Show the modal
+                $('#contentModal').modal('show');
+            });
+    
+            // Close the modal when the close button or outside the modal is clicked
+            $('.close, .modal').on('click', function() {
+                $('#contentModal').modal('hide');
             });
         });
+    
+        function markAsSent(button) {
+            var contactId = $(button).data('contact-id');
+            $.ajax({
+                url: '/sound/update_status/' + contactId + '/',
+                type: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        button.classList.remove('btn-pending');
+                        button.classList.add('btn-sent');
+                        button.textContent = 'Sent';
+                    } else {
+                        alert('Failed to update status');
+                    }
+                },
+                error: function() {
+                    alert('Failed to update status');
+                }
+            });
+        }
     </script>
+    
+    
 </body>
 </html>
