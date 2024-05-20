@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        .content-cell {
+            max-width: 200px;
+            overflow: hidden;
+        }
+        .content-cell div {
+            white-space: pre-wrap;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        .read-more {
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0 text-center">Contact List</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">S.No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Sent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in page_obj %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.phone_number }}</td>
+                            <td class="content-cell">
+                                <div class="content-short truncate">
+                                    {{ contact.content|truncatewords:20 }}
+                                </div>
+                                <div class="content-full d-none">
+                                    {{ contact.content }}
+                                </div>
+                                <span class="read-more">Read More</span>
+                            </td>
+                            <td><button type="button" class="btn btn-success">Sent</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.read-more').on('click', function() {
+                var $this = $(this);
+                var $contentShort = $this.siblings('.content-short');
+                var $contentFull = $this.siblings('.content-full');
+                
+                if ($contentFull.hasClass('d-none')) {
+                    $contentShort.addClass('d-none');
+                    $contentFull.removeClass('d-none');
+                    $this.text('Read Less');
+                } else {
+                    $contentFull.addClass('d-none');
+                    $contentShort.removeClass('d-none');
+                    $this.text('Read More');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
