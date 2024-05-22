@@ -65,8 +65,10 @@
                             <th scope="col">Name <span class="emoji">👤</span></th>
                             <th scope="col">Email <span class="emoji">📧</span></th>
                             <th scope="col">Phone Number <span class="emoji">📞</span></th>
+                            <th scope="col">Created At <span class="emoji">📅</span></th>
                             <th scope="col">Content <span class="emoji">📝</span></th>
                             <th scope="col">Status <span class="emoji">⚙️</span></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -76,6 +78,7 @@
                             <td>{{ contact.name }}</td>
                             <td>{{ contact.email }}</td>
                             <td>{{ contact.phone_number }}</td>
+                            <td>{{ contact.created_at|date:"Y-m-d H:i:s" }}</td>
                             <td class="content-cell">
                                 <div class="content-short truncate">
                                     {{ contact.content|truncatewords:20 }}
@@ -90,6 +93,7 @@
                                     <button type="button" class="btn btn-sent" data-contact-id="{{ contact.id }}" disabled>Sent</button>
                                 {% endif %}
                             </td>
+                            
                         </tr>
                         <!-- Modal -->
                         <div class="modal fade" id="contentModal{{ contact.id }}" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel{{ contact.id }}" aria-hidden="true">
@@ -191,9 +195,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-

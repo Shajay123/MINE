@@ -15,14 +15,14 @@
           background-position: center;
           background-blend-mode: overlay;
           animation: backgroundAnimation 5s infinite alternate;
-          transition: background-color 0.3s ease;
+          transition: background-color 0.3s ease, color 0.3s ease;
           color: #000; /* Default text color */
       }
       @keyframes backgroundAnimation {
-          from {
+          0% {
               filter: brightness(0.8);
           }
-          to {
+          100% {
               filter: brightness(1);
           }
       }
@@ -72,6 +72,10 @@
       .form-control {
           border-radius: 5px;
           margin-bottom: 15px;
+          transition: box-shadow 0.3s ease;
+      }
+      .form-control:focus {
+          box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
       }
       .btn-primary {
           background-color: #007bff;
@@ -258,11 +262,15 @@
       // Function to set the theme
       function setTheme(theme) {
           localStorage.setItem('theme', theme); // Save theme preference to local storage
+          document.body.classList.add('theme-transition'); // Add transition class
           if (theme === 'dark') {
               document.body.classList.add('dark-mode'); // Apply dark mode class to body
           } else {
               document.body.classList.remove('dark-mode'); // Remove dark mode class from body
           }
+          setTimeout(() => {
+              document.body.classList.remove('theme-transition'); // Remove transition class after animation
+          }, 300);
       }
   
       // Check the theme preference on page load
@@ -277,6 +285,11 @@
       function applyTheme(theme) {
           setTheme(theme); // Set the theme according to the dropdown selection
       }
-  </script>
+    </script>
+    <style>
+      .theme-transition {
+          transition: background-color 0.3s ease, color 0.3s ease;
+      }
+    </style>
 </body>
 </html>
