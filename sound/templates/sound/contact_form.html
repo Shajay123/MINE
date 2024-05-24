@@ -6,169 +6,155 @@
     <title>Contact Form</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-      body {
-          background-color: #f8f9fa; /* Light gray background */
-          background-image: url('https://source.unsplash.com/1600x900/?nature');
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-position: center;
-          background-blend-mode: overlay;
-          animation: backgroundAnimation 5s infinite alternate;
-          transition: background-color 0.3s ease, color 0.3s ease;
-          color: #000; /* Default text color */
-      }
-      @keyframes backgroundAnimation {
-          0% {
-              filter: brightness(0.8);
-          }
-          100% {
-              filter: brightness(1);
-          }
-      }
-      .navbar {
-          background-color: rgba(0, 0, 0, 0.5);
-      }
-      .navbar-brand {
-          color: #fff;
-          font-weight: bold;
-          font-size: 1.5rem;
-          margin-right: 50px;
-      }
-      .navbar-nav {
-          margin-left: auto;
-      }
-      .nav-link {
-          margin-right: 20px;
-      }
-      .theme-icon {
-          width: 20px;
-          height: 20px;
-          margin-right: 10px;
-      }
-      .card {
-          border: none;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          padding: 20px;
-          background-color: rgba(255, 255, 255, 0.8);
-          margin-top: 50px;
-          animation: fadeInUp 1s ease forwards;
-      }
-      .card-header {
-          background-color: #007bff;
-          color: #fff;
-          border-radius: 10px 10px 0 0;
-          padding: 10px 20px;
-      }
-      .card-body {
-          padding: 20px;
-      }
-      .get-own-heading {
-          font-weight: bold;
-          font-size: 1.5rem;
-          text-align: center;
-      }
-      .form-control {
-          border-radius: 5px;
-          margin-bottom: 15px;
-          transition: box-shadow 0.3s ease;
-      }
-      .form-control:focus {
-          box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
-      }
-      .btn-primary {
-          background-color: #007bff;
-          border: none;
-          border-radius: 5px;
-          padding: 10px 20px;
-          font-size: 1rem;
-          transition: background-color 0.3s ease;
-      }
-      .btn-primary:hover {
-          background-color: #0056b3;
-      }
-      .alert {
-          margin-top: 20px;
-          border-radius: 5px;
-      }
-      .whatsapp-icon {
-          position: fixed;
-          bottom: 20px;
-          left: 20px;
-          width: 50px;
-          height: 50px;
-          background-color: #25D366;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          animation: flare 1.5s infinite;
-      }
-      .whatsapp-icon img {
-          width: 30px;
-          height: 30px;
-      }
-      @keyframes fadeInUp {
-          from {
-              opacity: 0;
-              transform: translateY(20px);
-          }
-          to {
-              opacity: 1;
-              transform: translateY(0);
-          }
-      }
-      @keyframes flare {
-          0%, 100% {
-              transform: scale(1);
-          }
-          50% {
-              transform: scale(1.1);
-          }
-      }
-      section {
-          padding: 60px 0;
-      }
-      footer {
-          background-color: rgba(0, 0, 0, 0.5);
-          color: #fff;
-          text-align: center;
-          padding: 20px 0;
-          margin-top: 50px;
-      }
-      .footer-text {
-          font-size: 1.2rem;
-      }
-      .emoji {
-          font-size: 1.5rem;
-          margin: 0 5px;
-      }
-      html {
-          scroll-behavior: smooth;
-      }
-      .dark-mode {
-          background-color: #121212;
-          background-image: url('https://source.unsplash.com/1600x900/?night');
-          color: #e0e0e0;
-      }
-      .dark-mode .navbar {
-          background-color: rgba(255, 255, 255, 0.1);
-      }
-      .dark-mode .navbar-brand, .dark-mode .nav-link {
-          color: #e0e0e0;
-      }
-      .dark-mode .card {
-          background-color: rgba(33, 33, 33, 0.9);
-      }
-      .dark-mode .card-header {
-          background-color: #333;
-      }
-      .dark-mode .btn-primary {
-          background-color: #1a73e8;
-      }
-  </style>
+        body {
+            background-color: #f8f9fa;
+            background-image: url('https://source.unsplash.com/1600x900/?nature');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-blend-mode: overlay;
+            animation: backgroundAnimation 5s infinite alternate;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: #000;
+        }
+        @keyframes backgroundAnimation {
+            0% { filter: brightness(0.8); }
+            100% { filter: brightness(1); }
+        }
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 50px;
+        }
+        .navbar-nav {
+            margin-left: auto;
+        }
+        .nav-link {
+            margin-right: 20px;
+        }
+        .theme-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin-top: 50px;
+            animation: fadeInUp 1s ease forwards;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+            padding: 10px 20px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .get-own-heading {
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .form-control {
+            border-radius: 5px;
+            margin-bottom: 15px;
+            transition: box-shadow 0.3s ease;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .alert {
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: flare 1.5s infinite;
+        }
+        .whatsapp-icon img {
+            width: 30px;
+            height: 30px;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes flare {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        section {
+            padding: 20px 0;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        .footer-text {
+            font-size: 1.2rem;
+        }
+        .emoji {
+            font-size: 1.5rem;
+            margin: 0 5px;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .dark-mode {
+            background-color: #121212;
+            background-image: url('https://source.unsplash.com/1600x900/?night');
+            color: #e0e0e0;
+        }
+        .dark-mode .navbar {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .dark-mode .navbar-brand, .dark-mode .nav-link {
+            color: #e0e0e0;
+        }
+        .dark-mode .card {
+            background-color: rgba(33, 33, 33, 0.9);
+        }
+        .dark-mode .card-header {
+            background-color: #333;
+        }
+        .dark-mode .btn-primary {
+            background-color: #1a73e8;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -176,7 +162,7 @@
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="https://thumbs.dreamstime.com/z/gradient-fire-phoenix-bird-simple-logo-design-black-bird-simple-logo-design-simple-gradient-fire-phoenix-bird-logo-158339374.jpg?w=768" alt="Logo" width="50" height="50" class="mr-2">
-                SHAAAK CORPORATION
+                SHAYAK MAX
             </a>
             <div class="navbar-nav ml-auto">
                 <div class="nav-item dropdown">
@@ -225,15 +211,30 @@
                     </div>
                     <div class="card-body">
                         {% if messages %}
-                            <div class="alert alert-success" role="alert">
-                                {% for message in messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
                                     {{ message }}
-                                {% endfor %}
-                            </div>
+                                </div>
+                            {% endfor %}
                         {% endif %}
                         <form id="myForm" method="post">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            <div class="form-group">
+                                <label for="id_name">Name</label>
+                                {{ form.name }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_email">Email</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_phone_number">Phone Number</label>
+                                {{ form.phone_number }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_content">Message</label>
+                                {{ form.content }}
+                            </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -246,7 +247,7 @@
 
     <!-- Footer -->
     <footer class="text-center">
-        <p>&copy; 2024 SHAAAK CORPORATION. All Rights Reserved.</p>
+        <p>&copy; 2024 SHAYAK MAX. All Rights Reserved.</p>
     </footer>
 
     <!-- WhatsApp Icon -->
@@ -259,37 +260,37 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-      // Function to set the theme
-      function setTheme(theme) {
-          localStorage.setItem('theme', theme); // Save theme preference to local storage
-          document.body.classList.add('theme-transition'); // Add transition class
-          if (theme === 'dark') {
-              document.body.classList.add('dark-mode'); // Apply dark mode class to body
-          } else {
-              document.body.classList.remove('dark-mode'); // Remove dark mode class from body
-          }
-          setTimeout(() => {
-              document.body.classList.remove('theme-transition'); // Remove transition class after animation
-          }, 300);
-      }
-  
-      // Check the theme preference on page load
-      window.onload = function() {
-          var theme = localStorage.getItem('theme'); // Retrieve theme preference from local storage
-          if (theme) {
-              setTheme(theme); // Set the theme according to the stored preference
-          }
-      };
-  
-      // Apply the selected theme when the dropdown is clicked
-      function applyTheme(theme) {
-          setTheme(theme); // Set the theme according to the dropdown selection
-      }
+        // Function to set the theme
+        function setTheme(theme) {
+            localStorage.setItem('theme', theme);
+            document.body.classList.add('theme-transition');
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            setTimeout(() => {
+                document.body.classList.remove('theme-transition');
+            },1 );
+        }
+
+        // Check the theme preference on page load
+        window.onload = function() {
+            var theme = localStorage.getItem('theme');
+            if (theme) {
+                setTheme(theme);
+            }
+        };
+
+        // Apply the selected theme when the dropdown is clicked
+        function applyTheme(theme) {
+            setTheme(theme);
+        }
     </script>
     <style>
-      .theme-transition {
-          transition: background-color 0.3s ease, color 0.3s ease;
-      }
+        .theme-transition {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
     </style>
 </body>
 </html>

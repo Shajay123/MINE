@@ -1,4 +1,3 @@
-# views.py
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
@@ -14,6 +13,9 @@ def contact_form(request):
             form.save()
             messages.success(request, 'Form submitted successfully!')
             return redirect('contact_form')
+        else:
+            for error in form.errors.values():
+                messages.error(request, error)
     else:
         form = ContactForm()
     return render(request, 'sound/contact_form.html', {'form': form})
