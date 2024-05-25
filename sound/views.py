@@ -5,7 +5,7 @@ from django.contrib import messages
 from .models import Contact
 from django.views.decorators.csrf import csrf_exempt
 from .forms import ContactForm
-
+@csrf_exempt
 def contact_form(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
