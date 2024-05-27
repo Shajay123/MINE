@@ -11,8 +11,7 @@ def contact_form(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Form submitted successfully!')
-            return redirect('contact_form')
+            return redirect('payment_issue')  
         else:
             for error in form.errors.values():
                 messages.error(request, error)
@@ -36,3 +35,8 @@ def update_status(request, contact_id):
         contact.save()
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'fail'}, status=400)
+
+
+
+def payment_issue(request):
+    return render(request, 'sound/success.html')
